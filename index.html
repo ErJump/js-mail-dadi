@@ -11,7 +11,7 @@
 </head>
 <body>
     <main class="min-vw-100 min-vh-100 bg-black py-5">
-        <div class="container rounded-2 p-5 ms_container ">
+        <div class="container-lg rounded-2 p-5 ms_container">
             <div class="row align-items-center">
                 <div class="col-12">
                     <h1 class="text-center">Extra Private Dice Game</h1>
@@ -27,6 +27,23 @@
                         <input type="email" class="form-control" id="input-mail">
                     </div>
                     <button type="submit" class="btn btn-primary d-inline" id="start-button">Inizia</button>
+                </div>
+                <div id="error-screen" class="d-none col-12 p-5 rounded-2 bg-danger text-white">Email non registrata - ricarica la pagina</div>
+            </div>
+        </div>
+        <div class="container-lg d-none" id="result-container">
+            <div class="row align-items-center">
+                <div class="col-6">
+                    <img src="assets/dice.gif" alt="dice" class="img-fluid">
+                </div>
+                <div class="col-6 p-5 rounded-2 bg-white flex-column">
+                    <h1 id="match-result" class="mb-4"></h1>
+                    <div class="mb-3">
+                        Il tuo risultato è: <strong id="user-result"></strong>
+                    </div>
+                    <div>
+                        Il risultato dell'avversario è: <strong id="ai-result"></strong>
+                    </div>
                 </div>
             </div>
         </div>

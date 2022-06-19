@@ -1,32 +1,59 @@
-//chiedo all'utente la email
-const userMail = prompt('inserisci la email (registrate: giampiero.fedeli@gmail.com , torofurio@gmail.com, amogliarray@gmail.com, ginobino@gmail.com , noisia@info.com , signoremio@gmail.com , lessgo@gmail.com)');
-//genero un array con varie email
+
 const mailList = ['giampiero.fedeli@gmail.com' , 'torofurio@gmail.com', 'amogliarray@gmail.com', 'ginobino@gmail.com' , 'noisia@info.com' , 'signoremio@gmail.com' , 'lessgo@gmail.com'];
-//creo la condizione per la quale l'email inserita dall'utente deve essere inclusa all'interno della lista per iniziare il gioco, altrimenti viene mostrato l'errore
+
+const button = document.getElementById("start-button");
 
 let mailCheck = false; 
 
-for (let i = 0; i < mailList.length ; i++){
-    const element = mailList[i];
-    if (element === userMail){
-        mailCheck = true;
-    }
+const mailBox = document.getElementById('email-list');
+
+for (let index = 0;  index <= mailList.length - 1; index++){
+    const newElement = document.createElement('li');
+    newElement.innerHTML = mailList[index];
+    mailBox.append(newElement); 
 }
 
-if (mailCheck === true){
-    alert('Email registrata - Inizia il gioco')
-    //dichiaro le costanti per il giocatore e l'ai
-    const userNumber =  Math.floor((Math.random() * 6) + 1);
-    const aiNumber = Math.floor((Math.random() * 6) + 1);
-    console.log(`il numero del giocatore è ${userNumber} e il numero dell'ai è ${aiNumber}`);
-    //applico le condizioni per vittoria, pareggio e sconfitta
-    if (userNumber > aiNumber){
-        alert(`VITTORIA: il giocatore ha fatto ${userNumber}, il computer ha fatto ${aiNumber}`);
-    } else if (userNumber === aiNumber){
-        alert(`PAREGGIO: il giocatore ha fatto ${userNumber}, il computer ha fatto ${aiNumber}`);
+button.addEventListener('click', function(){
+    const userMail = document.getElementById('input-mail').value;
+    
+    for (let i = 0; i < mailList.length ; i++){
+        const element = mailList[i];
+        if (element === userMail){
+            mailCheck = true;
+        }
+    };
+
+    if (mailCheck === true){
+        alert('Email registrata - Inizia il gioco')
+        document.getElementById('error-screen').classList.add('d-none');
+        document.querySelector('.ms_container').classList.add('d-none');
+        document.getElementById('result-container').classList.remove('d-none');
+        //dichiaro le costanti per il giocatore e l'ai
+        const userNumber =  Math.floor((Math.random() * 6) + 1);
+        const aiNumber = Math.floor((Math.random() * 6) + 1);
+        const matchResult = document.getElementById('match-result');
+        const aiResult = document.getElementById('ai-result');
+        const userResult = document.getElementById('user-result');
+        console.log(`il numero del giocatore è ${userNumber} e il numero dell'ai è ${aiNumber}`);
+        //applico le condizioni per vittoria, pareggio e sconfitta
+        if (userNumber > aiNumber){
+            matchResult.innerHTML = 'Winner winner chicken dinner!';
+            matchResult.classList.add('text-success');
+            userResult.innerHTML = userNumber;
+            aiResult.innerHTML = aiNumber;
+        } else if (userNumber === aiNumber){
+            matchResult.innerHTML = 'Tie';
+            matchResult.classList.add('text-primary');
+            userResult.innerHTML = userNumber;
+            aiResult.innerHTML = aiNumber;
+        } else {
+            matchResult.innerHTML = 'Defeat';
+            matchResult.classList.add('text-danger');
+            userResult.innerHTML = userNumber;
+            aiResult.innerHTML = aiNumber;
+        }
     } else {
-        alert(`SCONFITTA: il giocatore ha fatto ${userNumber}, il computer ha fatto ${aiNumber}`);
-    }
-} else {
-    alert('Email non registrata - ricarica la pagina')
-}
+        //alert('Email non registrata - ricarica la pagina')
+        document.getElementById('error-screen').classList.remove('d-none');
+    };
+});
