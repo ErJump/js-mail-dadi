@@ -34,23 +34,19 @@ button.addEventListener('click', function(){
         const matchResult = document.getElementById('match-result');
         const aiResult = document.getElementById('ai-result');
         const userResult = document.getElementById('user-result');
+        userResult.innerHTML = userNumber;
+        aiResult.innerHTML = aiNumber;
         console.log(`il numero del giocatore è ${userNumber} e il numero dell'ai è ${aiNumber}`);
         //applico le condizioni per vittoria, pareggio e sconfitta
         if (userNumber > aiNumber){
             matchResult.innerHTML = 'Winner winner chicken dinner!';
             matchResult.classList.add('text-success');
-            userResult.innerHTML = userNumber;
-            aiResult.innerHTML = aiNumber;
         } else if (userNumber === aiNumber){
             matchResult.innerHTML = 'Tie';
             matchResult.classList.add('text-primary');
-            userResult.innerHTML = userNumber;
-            aiResult.innerHTML = aiNumber;
         } else {
             matchResult.innerHTML = 'Defeat';
             matchResult.classList.add('text-danger');
-            userResult.innerHTML = userNumber;
-            aiResult.innerHTML = aiNumber;
         }
     } else {
         //alert('Email non registrata - ricarica la pagina')
